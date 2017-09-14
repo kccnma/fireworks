@@ -4,6 +4,34 @@
   <script src="processing.js"></script>
 	<link rel="stylesheet" href="style.css"/></head>
 <body>
+    
+
+    
+<script type="application/javascript">
+    
+    // USER CONTROL STROKE WEIGHT
+    cgstrokeweight=1; //DEFAULT STROKE WEIGHT
+    function thicken() {
+        cgstrokeweight=cgstrokeweight+1;
+        console.log("stroke weight is " + cgstrokeweight);
+    }
+    function thinner() {
+        cgstrokeweight=cgstrokeweight-1;
+        console.log("stroke weight is " + cgstrokeweight);
+    }
+    
+    // CLICK COUNTER 
+    cgclickcounter = 0;
+    function updateclickcounter() {
+        cgclickcounter = cgclickcounter + 1;
+        console.log("You clicked " + cgclickcounter + " times");
+            if (cgclickcounter == 5) {
+            alert("woohoo! you win!");
+        }
+    }
+    
+    
+</script>
 
 <script type="application/processing">
 
@@ -39,6 +67,7 @@ void draw() {
 
 void mousePressed() {
   bursts.add(new Burst(mouseX, mouseY, int(random(30, 100))));
+  updateclickcounter();
 }
 class Burst{
   float gravity;
@@ -91,7 +120,7 @@ class Particle {
     x += vx;
     y += vy;
     stroke(c);
-    strokeWeight(1);
+    strokeWeight(cgstrokeweight);
     line(px, py, x, y);
     return y > height || x < 0 || x > width;
   }
@@ -102,6 +131,11 @@ class Particle {
 </script>
 
 <canvas></canvas>
+    
+<footer>
+    <a href="#" onclick="thicken();">Thicken</a>
+    <a href="#" onclick="thinner();">Thinner</a>
+</footer>
 
 </body>
 </html>
